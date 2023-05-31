@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Checkout</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <img src="./images/logo.png" alt="logo">
+            <ul>
+                <a href="./index.html"><li>home</li></a>
+                <a href="./index.html#main"><li>shop all</li></a>
+                <a href="#contactForm"><li>contact</li></a>
+            </ul>
+            <!-- <img src="./images/icons8-shopping-bag-50.png" alt="bag" class="icon"> -->
+            <div class="right-nav">
+                <a href="./add.html" class="add-product">add</a>
+                <a href="./checkout.html" class="bag">
+                    <i class="fa-sharp fa-solid fa-bag-shopping fa-xl"></i>
+                    <span class="cart-items">0</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="cart-form-container" >
+            
+            
+        </div>
+
+        <footer class="custom-footer">
+            <div class="custom-container">
+              <div class="row">
+                <div>
+                  <h4>Contact Us</h4>
+                  <form class="custom-form" id="contactForm" action="contact.php" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                  </form>
+                </div>
+                <div>
+                  <h4>Follow Us</h4>
+                  <ul class="custom-social-icons">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <p>&copy; 2023 Exclusive Wear. All rights reserved.</p>
+                </div>
+              </div>
+            </div>
+        </footer>        
+    </div>
+
+    <script src="./shoe-catalogue.js"></script>
+    <script src="https://kit.fontawesome.com/0dc0e0665a.js" crossorigin="anonymous"></script>
+</body>
+</html>
