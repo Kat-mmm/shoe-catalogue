@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+    <!-- <link rel="stylesheet" href="./form.css"> -->
     <title>Shoe Catalogue</title>
 </head>
 <body>
@@ -17,13 +18,42 @@
             </ul>
             <!-- <img src="./images/icons8-shopping-bag-50.png" alt="bag" class="icon"> -->
             <div class="right-nav">
-                <a href="./add.html" class="add-product">add</a>
+                <a href="#" class="add-product">add</a>
                 <a href="./checkout.html" class="bag">
                     <i class="fa-sharp fa-solid fa-bag-shopping fa-xl"></i>
                     <span class="cart-items">0</span>
                 </a>
             </div>
         </nav>
+        <div id="popup-container"></div>
+
+        <script id="popup-form-template" type="text/x-handlebars-template">
+            <div id="form-container">
+              <h2>Add New Shoe</h2>
+              <button id="close-btn">X</button>
+              <form id="shoe-form">
+                <label for="color">Color:</label>
+                <input type="text" id="color" required>
+
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" required>
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" required>
+
+                <label for="size">Size:</label>
+                <input type="number" id="size" required>
+
+                <label for="in_stock">Quantity:</label>
+                <input type="number" id="in_stock" required>
+
+                <label for="img_url">Image URL:</label>
+                <input type="text" id="img_url" required>
+          
+                <button type="submit">Add Shoe</button>
+              </form>
+            </div>
+        </script>
 
         <header id="home">
             <img src="./images/hdshoe1.jpg" alt="orangeshoe">

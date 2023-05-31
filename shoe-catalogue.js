@@ -3,22 +3,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const brandEl = document.getElementById('brand-dropdown');
     const color = document.getElementById('color-dropdown');
     const searchBtn = document.querySelector('.search-btn');
-    // const addToCartBtn = document.querySelector('.add-to-cart');
-    const cartItemsEl = document.querySelector('.cart-items');
     
-
-    //Adding shoe form elements
-    const colorTxtEl = document.getElementById('color');
-    const brandTxtEl = document.getElementById('brand');
-    const priceNumEl = document.getElementById('price');
-    const sizeNumEl = document.getElementById('size');
-    const inStockNumEl = document.getElementById('in_stock');
-    const imgUrlTxtEl = document.getElementById('img_url');
-    const addShoeFrm = document.querySelector('.add-shoe-form');
-
     let templateSource = document.querySelector('.productTemplate').innerHTML;
-
-    let cartCount = Number(cartItemsEl.value);
 
     let shoesData = { shoes: [
         {
@@ -184,6 +170,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     ]}
 
+
+    const addProductLink = document.querySelector('.add-product');
+    const popupContainer = document.getElementById('popup-container');
+
+
+    const formTemplateSource = document.getElementById('popup-form-template').innerHTML;
+    const compiledTemplate = Handlebars.compile(formTemplateSource);
+    let existingForm = null;
+    
+
     function filterShoes(){
         const selectedColor = color.value;
         const selectedSize = sizeEl.value;
@@ -206,38 +202,73 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
     }
 
-    // function addToCart(){
-    //     cartCount++;
-    //     cartItemsEl.innerHTML = cartCount;
-    // }
-
-    function addShoe(e){
-        e.preventDefault();
-
-        try{
-            let newShoe = {
-                color: colorTxtEl.value,
-                brand: brandTxtEl.value,
-                price: parseInt(priceNumEl.value),
-                size: parseInt(sizeNumEl.value),
-                in_stock: parseInt(inStockNumEl.value),
-                img_url: imgUrlTxtEl.value
-            }
+    function addShoe(){
+        if (existingForm) {
+            // If a form already exists, remove it before creating a new one
+            popupContainer.removeChild(existingForm);
+            existingForm = null;
+        }
     
-            shoesData.shoes.push(newShoe);
-
-            addShoeFrm.reset();
-        }
-        catch(e){
-            console.log(e);
-        }
+        // Generate the pop-up form HTML
+        const popupFormHTML = compiledTemplate();
+    
+        // Create the pop-up form element
+        const popupForm = document.createElement('div');
+        popupForm.classList.add('popup-form');
+        popupForm.innerHTML = popupFormHTML;
+    
+        // Close button event listener
+        const closeBtn = popupForm.querySelector('#close-btn');
+        closeBtn.addEventListener('click', () => {
+        popupContainer.removeChild(popupForm);
+        existingForm = null;
+        });
+    
+        // Form submission event listener
+        const shoeForm = popupForm.querySelector('#shoe-form');
+        shoeForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+    
+        // Retrieve input field values
+        const color = document.getElementById('color').value;
+        const brand = document.getElementById('brand').value;
+        const price = parseFloat(document.getElementById('price').value);
+        const size = parseInt(document.getElementById('size').value);
+        const inStock = parseInt(document.getElementById('in_stock').value);
+        const imgUrl = document.getElementById('img_url').value;
+    
+        // Create new shoe object
+        const newShoe = {
+            color: color,
+            brand: brand,
+            price: price,
+            size: size,
+            in_stock: inStock,
+            img_url: imgUrl
+        };
+    
+        // Add new shoe to shoesData and update display
+        shoesData.shoes.push(newShoe);
+        filterShoes();
+    
+        // Remove pop-up form
+        popupContainer.removeChild(popupForm);
+        existingForm = null;
+        shoeForm.reset();
+        });
+    
+        // Append pop-up form to pop-up container
+        popupContainer.appendChild(popupForm);
+    
+        // Store the reference to the existing form
+        existingForm = popupForm;
     }
-
+    
     let template = Handlebars.compile(templateSource);
     let filledTemplate = template(shoesData);
     document.querySelector('.shoes-container').innerHTML = filledTemplate;
 
     searchBtn.addEventListener('click', filterShoes);
-    // addToCartBtn.addEventListener('click', addToCart);
-    addShoeFrm.addEventListener('submit', addShoe);
+    addProductLink.addEventListener('click', addShoe);
 })
+
