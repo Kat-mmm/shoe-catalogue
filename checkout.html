@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./checkout.css">
     <title>Checkout</title>
 </head>
 <body>
@@ -15,7 +16,6 @@
                 <a href="./index.html#main"><li>shop all</li></a>
                 <a href="#contactForm"><li>contact</li></a>
             </ul>
-            <!-- <img src="./images/icons8-shopping-bag-50.png" alt="bag" class="icon"> -->
             <div class="right-nav">
                 <a href="./add.html" class="add-product">add</a>
                 <a href="./checkout.html" class="bag">
@@ -25,9 +25,9 @@
             </div>
         </nav>
 
-        <div class="cart-form-container" >
+        <div class="cart-container" >
             
-            
+          
         </div>
 
         <footer class="custom-footer">
@@ -61,6 +61,30 @@
         </footer>        
     </div>
 
+    <script type="text/x-template" id="shoppingBagTemplate">
+      <div>
+        {{#each products}}
+          <div class="shoe">
+            <img src={{img_url}} alt={{brand}}>
+            <h4>{{brand}} - <span>{{color}}</span></h4>
+            <p class="price">R {{price}}</p>
+            <div class="details">
+                <p class="size">Size: <span>{{size}}</span></p>
+            </div>
+         </div>
+        {{/each}}
+      </div>
+      <div class="summary">
+        <h3>Summary</h3>
+        <p>Sub total<span>{{subTotal}}</span></p>
+        <p>Delivery <span>{{delivery}}</span></p>
+        <p>Total <span>{{total}}</span></p>
+        <button>Cancel</button>
+        <button>Checkout</button>
+      </div>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
     <script src="./shoe-catalogue.js"></script>
     <script src="https://kit.fontawesome.com/0dc0e0665a.js" crossorigin="anonymous"></script>
 </body>

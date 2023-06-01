@@ -19,15 +19,17 @@
             <!-- <img src="./images/icons8-shopping-bag-50.png" alt="bag" class="icon"> -->
             <div class="right-nav">
                 <a href="#" class="add-product">add</a>
-                <a href="./checkout.html" class="bag">
+                <a href="#" class="bag">
                     <i class="fa-sharp fa-solid fa-bag-shopping fa-xl"></i>
                     <span class="cart-items">0</span>
                 </a>
             </div>
         </nav>
         <div id="popup-container"></div>
+        <div id="bag-popup-container"></div>
 
-        <script id="popup-form-template" type="text/x-handlebars-template">
+
+        <script type="text/x-template" id="popup-form-template">
             <div id="form-container">
               <h2>Add New Shoe</h2>
               <button id="close-btn">X</button>
@@ -154,12 +156,41 @@
                     <p class="size">Size: <span>{{size}}</span></p>
                     <p class="stock">In stock: <span>{{in_stock}}</span></p>
                 </div>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" data-shoe-id='{{@index}}'>Add to Cart</button>
             </div>
         {{/each}}
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <!-- Bag Popup Template -->
+    <script id="bag-popup-template" type="text/x-handlebars-template">
+      <div class="bag-popup">
+        <div class="bag-items">
+          <h2>Bag</h2>
+          {{#each products}}
+          <div class="bag-item">
+            <img src="{{img_url}}" alt="{{brand}}" class="shoe-img">
+            <div class="shoe-details">
+              <h3>{{brand}}</h3>
+              <p>Color: {{color}}</p>
+              <p>Price: R{{price}}</p>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <div class="order-summary">
+          <h2>Order Summary</h2>
+          <div class="tot"><p>Subtotal </p> <p>R{{subTotal}}</p></div>
+          <div class="tot"> <p>Total  </p><p>R{{total}}</p></div>
+          <div class="buttons">
+            <button class="checkout-btn">Checkout</button>
+            <button class="cancel-btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
     <script src="./shoe-catalogue.js"></script>
     <script src="https://kit.fontawesome.com/0dc0e0665a.js" crossorigin="anonymous"></script>
 </body>
